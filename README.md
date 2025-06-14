@@ -3,7 +3,7 @@
 <p align="center"> <strong>
 Attention please ! This is a custom version ！Thanks for the original author.I add
 my own ImgsURL config in this plugin.This config only used for personal.I hava never change the other configs.
-If you want to see the code ,please visit <https://github.com/flveboy/obsidian-emo-uploader-custom>.Thanks a lot!
+If you want to see the code ,please visit [Github](https://github.com/flveboy/obsidian-emo-uploader-custom).Thanks a lot!
 </strong>
 </p>
 <p align="center">
