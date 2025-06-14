@@ -1,7 +1,7 @@
 {
   "id": "emo-uploader",
   "name": "Emo Uploader Custom",
-  "version": "2.19.1",
+  "version": "1.0.0",
   "minAppVersion": "0.15.6",
   "description": "This is a custom version.Embed markdown online file/image links. This plugin is for uploading images to hosting or files to github in Obsidian.",
   "author": "loong",
