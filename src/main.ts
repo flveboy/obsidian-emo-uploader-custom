@@ -14,6 +14,7 @@ import { CloudinaryUploader } from './uploader/uploader-cloudinary'
 import { SmmsUploader } from './uploader/uploader-smms'
 import { ImgbbUploader } from './uploader/uploader-imgbb'
 import { ImgurUploader } from './uploader/uploader-imgur'
+import { ImgsurlUploader } from './uploader/uploader-imgsurl'
 import { CatboxUploader } from './uploader/uploader-catbox'
 import { CheveretoUploader } from './uploader/uploader-chevereto'
 import { AlistUploader } from './uploader/uploader-alist'
@@ -68,6 +69,7 @@ export default class Emo extends Plugin {
         [HostingProvider.Smms]: () => new SmmsUploader(this.config.smms_parms),
         [HostingProvider.Imgbb]: () => new ImgbbUploader(this.config.imgbb_parms),
         [HostingProvider.Imgur]: () => new ImgurUploader(this.config.imgur_parms),
+        [HostingProvider.ImgsURL]: () => new ImgsurlUploader(this.config.imgsurl_parms),
         [HostingProvider.Catbox]: () => new CatboxUploader(this.config.catbox_parms),
         [HostingProvider.Chevereto]: () => new CheveretoUploader(this.config.chevereto_parms),
         [HostingProvider.Alist]: () => new AlistUploader(this.config.alist_parms),

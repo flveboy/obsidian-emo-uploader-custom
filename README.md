@@ -1,7 +1,13 @@
 
-# Obsidian Emo Uploader
-
+# Obsidian Emo Uploader Custom
+<p align="center"> <strong>
+Attention please ! This is a custom version ！Thanks for the original author.I add
+my own ImgsURL config in this plugin.This config only used for personal.I hava never change the other configs.
+If you want to see the code ,please visit https://github.com/flveboy/obsidian-emo-uploader-custom.Thanks a lot!
+</strong>
+</p>
 <p align="center">
+This is the original info！
 
       <img src="https://img.shields.io/github/release-date/yaleiyale/obsidian-emo-uploader?style=for-the-badge">
 
@@ -10,6 +16,8 @@
       <img src="https://img.shields.io/codefactor/grade/github/yaleiyale/obsidian-emo-uploader/main?style=for-the-badge">
 
 </p>
+
+
 
 Embed markdown online file/image links.  
 

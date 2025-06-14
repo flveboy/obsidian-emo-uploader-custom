@@ -1,14 +1,14 @@
 {
-  "name": "obsidian-emo-uploader",
+  "name": "obsidian-emo-uploader-custom",
   "version": "1.0.0",
-  "description": "Embed markdown online file/image links. This plugin is for uploading images to hosting or files to github in Obsidian.",
+  "description": "This is a custom version.Embed markdown online file/image links. This plugin is for uploading images to hosting or files to github in Obsidian.",
   "main": "index.js",
   "scripts": {
     "build": "obsidian-plugin build --with-stylesheet src/styles.css src/main.ts",
     "dev": "obsidian-plugin dev --with-stylesheet src/styles.css src/main.ts"
   },
   "keywords": [],
-  "author": "yaleiyale",
+  "author": "loong",
   "license": "MIT",
   "dependencies": {
     "js-sha256": "^0.10.1"
