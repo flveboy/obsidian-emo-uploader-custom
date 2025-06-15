@@ -5,6 +5,7 @@ import { EmoFragment } from '../base/emo-fragment'
 import { HostingProvider } from '../config'
 import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID } from '../base/constants'
 import { t } from '../lang/helpers'
+import {IS_DEV} from "../env";
 
 export class ImgurFragment extends EmoFragment {
   loginState!: Setting
@@ -70,9 +71,13 @@ export class ImgurFragment extends EmoFragment {
               }
             }
             request(req).then(() => {
-              console.log(new Notice(t('delete done'), 2000))
+              if(IS_DEV) {
+                console.log(new Notice(t('delete done'), 2000))
+              }
             }).catch(() => {
-              console.log(new Notice(t('delete fail'), 2000))
+              if(IS_DEV) {
+                console.log(new Notice(t('delete fail'), 2000))
+              }
             })
           })
       })
@@ -108,7 +113,9 @@ export class ImgurFragment extends EmoFragment {
         this.authenticated = true
       }
     } catch (err) {
-      console.log(err)
+      if(IS_DEV) {
+        console.log(err)
+      }
     }
   }
 

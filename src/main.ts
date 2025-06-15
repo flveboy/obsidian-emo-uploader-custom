@@ -19,13 +19,16 @@ import { CatboxUploader } from './uploader/uploader-catbox'
 import { CheveretoUploader } from './uploader/uploader-chevereto'
 import { AlistUploader } from './uploader/uploader-alist'
 import { EasyImageUploader } from './uploader/uploader-easyimage'
+import { IS_DEV } from './env';
 
 export default class Emo extends Plugin {
   config!: Config
 
   // Plugin load steps
   async onload (): Promise<void> {
-    console.log('loading  Emo uploader')
+    if(IS_DEV) {
+      console.log('loading  Emo uploader')
+    }
     await this.loadSettings()
     this.setupPasteHandler()
     this.addSettingTab(new EmoUploaderSettingTab(this.app, this))
@@ -33,7 +36,9 @@ export default class Emo extends Plugin {
 
   // Plugin shutdown steps
   onunload (): void {
-    console.log('unloading Emo uploader')
+    if(IS_DEV){
+      console.log('unloading Emo uploader')
+    }
   }
 
   // Load settings infromation
@@ -87,13 +92,17 @@ export default class Emo extends Plugin {
             this.replaceText(editor, pastePlaceText, markdownText.slice(showTag)) // use image/file link
           }).catch(err => {
             this.replaceText(editor, pastePlaceText, `[${this.config.choice} upload error]()`)
-            console.log(new Notice(this.config.choice + t('upload error'), 2000))
-            console.log(err)
+            if(IS_DEV) {
+              console.log(new Notice(this.config.choice + t('upload error'), 2000))
+              console.log(err)
+            }
           })
         }
       } else {
-        console.log(new Notice(t('parms error'), 2000))
-        console.log(uploader)
+        if(IS_DEV) {
+          console.log(new Notice(t('parms error'), 2000))
+          console.log(uploader)
+        }
       }
     }
   }

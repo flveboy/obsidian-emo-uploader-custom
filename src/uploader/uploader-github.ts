@@ -4,6 +4,7 @@ import type { GithubParms } from '../parms/parms-github'
 import { CDNprovider } from '../parms/parms-github'
 import { getBase64, getRandomFileName } from '../utils/file-helper'
 import { EmoUploader } from '../base/emo-uploader'
+import {IS_DEV} from "../env";
 
 export class GithubUploader extends EmoUploader {
   parms!: GithubParms
@@ -42,7 +43,9 @@ export class GithubUploader extends EmoUploader {
     return await new Promise((resolve, reject) => {
       request(req).then(() => {
         let markdownText: string
-        console.log(this.parms.cdn)
+        if(IS_DEV) {
+          console.log(this.parms.cdn)
+        }
         switch (this.parms.cdn) {
           case CDNprovider.jsdelivr:
             markdownText = `![gh](https://cdn.jsdelivr.net/gh/${this.parms.required.owner}/${this.parms.required.repo}@${this.parms.required.branch}/${filePath})`
