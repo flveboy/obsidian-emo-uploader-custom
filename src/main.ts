@@ -67,41 +67,45 @@ export default class Emo extends Plugin {
   startUpload (files: FileList, evt: Event, editor: Editor): void {
     let uploader: EmoUploader
     if (files.length > 0) {
-      const UploaderMap = {
-        [HostingProvider.Github]: () => new GithubUploader(this.config.github_parms),
-        [HostingProvider.ImgURL]: () => new ImgurlUploader(this.config.imgurl_parms),
-        [HostingProvider.Cloudinary]: () => new CloudinaryUploader(this.config.cloudinary_parms),
-        [HostingProvider.Smms]: () => new SmmsUploader(this.config.smms_parms),
-        [HostingProvider.Imgbb]: () => new ImgbbUploader(this.config.imgbb_parms),
-        [HostingProvider.Imgur]: () => new ImgurUploader(this.config.imgur_parms),
-        [HostingProvider.ImgsURL]: () => new ImgsurlUploader(this.config.imgsurl_parms),
-        [HostingProvider.Catbox]: () => new CatboxUploader(this.config.catbox_parms),
-        [HostingProvider.Chevereto]: () => new CheveretoUploader(this.config.chevereto_parms),
-        [HostingProvider.Alist]: () => new AlistUploader(this.config.alist_parms),
-        [HostingProvider.EasgyImage]: () => new EasyImageUploader(this.config.easyimage_parms)
-      }
-      uploader = UploaderMap[this.config.choice]()
-      if (uploader.isValid()) { // check the necessary parameters
-        evt.preventDefault()
-        for (const file of files) {
-          const randomString = (Math.random() * 10086).toString(36).slice(-6)
-          const pastePlaceText = `![uploading...](${randomString})\n`
-          editor.replaceSelection(pastePlaceText) // mark the uploading
-          uploader.upload(file).then((markdownText) => {
-            const showTag = file.type.startsWith('image') ? 0 : 1// whether use `!` at the beginning
-            this.replaceText(editor, pastePlaceText, markdownText.slice(showTag)) // use image/file link
-          }).catch(err => {
-            this.replaceText(editor, pastePlaceText, `[${this.config.choice} upload error]()`)
-            if(IS_DEV) {
-              console.log(new Notice(this.config.choice + t('upload error'), 2000))
-              console.log(err)
+      for (const file of files) {
+        if (file.type.startsWith('image')) { // 只处理图片文件
+          const UploaderMap = {
+            [HostingProvider.Github]: () => new GithubUploader(this.config.github_parms),
+            [HostingProvider.ImgURL]: () => new ImgurlUploader(this.config.imgurl_parms),
+            [HostingProvider.Cloudinary]: () => new CloudinaryUploader(this.config.cloudinary_parms),
+            [HostingProvider.Smms]: () => new SmmsUploader(this.config.smms_parms),
+            [HostingProvider.Imgbb]: () => new ImgbbUploader(this.config.imgbb_parms),
+            [HostingProvider.Imgur]: () => new ImgurUploader(this.config.imgur_parms),
+            [HostingProvider.ImgsURL]: () => new ImgsurlUploader(this.config.imgsurl_parms),
+            [HostingProvider.Catbox]: () => new CatboxUploader(this.config.catbox_parms),
+            [HostingProvider.Chevereto]: () => new CheveretoUploader(this.config.chevereto_parms),
+            [HostingProvider.Alist]: () => new AlistUploader(this.config.alist_parms),
+            [HostingProvider.EasgyImage]: () => new EasyImageUploader(this.config.easyimage_parms)
+          }
+          uploader = UploaderMap[this.config.choice]()
+          if (uploader.isValid()) { // check the necessary parameters
+            evt.preventDefault()
+            for (const file of files) {
+              const randomString = (Math.random() * 10086).toString(36).slice(-6)
+              const pastePlaceText = `![uploading...](${randomString})\n`
+              editor.replaceSelection(pastePlaceText) // mark the uploading
+              uploader.upload(file).then((markdownText) => {
+                const showTag = file.type.startsWith('image') ? 0 : 1// whether use `!` at the beginning
+                this.replaceText(editor, pastePlaceText, markdownText.slice(showTag)) // use image/file link
+              }).catch(err => {
+                this.replaceText(editor, pastePlaceText, `[${this.config.choice} upload error]()`)
+                if (IS_DEV) {
+                  console.log(new Notice(this.config.choice + t('upload error'), 2000))
+                  console.log(err)
+                }
+              })
             }
-          })
-        }
-      } else {
-        if(IS_DEV) {
-          console.log(new Notice(t('parms error'), 2000))
-          console.log(uploader)
+          } else {
+            if (IS_DEV) {
+              console.log(new Notice(t('parms error'), 2000))
+              console.log(uploader)
+            }
+          }
         }
       }
     }
